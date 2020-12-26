@@ -13,8 +13,8 @@ public class LoginService {
 	@Autowired
 	private LoginDao loginDao;
 
-	public BaseResponse userSignUp(UserDTO userDTO) {
-		return loginDao.userSignUp(userDTO);
+	public BaseResponse bloggerSignUp(UserDTO userDTO) {
+		return loginDao.bloggerSignUp(userDTO);
 	}
 
 }

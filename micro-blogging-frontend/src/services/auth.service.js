@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8082/oauth/token";
+const API_BASE_URL = "http://localhost:8082";
 
 class AuthService {
   login(username, password) {
@@ -13,7 +13,7 @@ class AuthService {
 
     var config = {
       method: 'post',
-      url: API_URL,
+      url: API_BASE_URL + '/oauth/token',
       headers: { 
         'Authorization': 'Basic bW9iaWxlOnBpbg=='
       },
@@ -37,11 +37,17 @@ class AuthService {
   }
 
   register(username, email, password) {
-    return axios.post(API_URL + "signup", {
-      username,
-      email,
-      password
-    });
+    let userDTO = {"username": username, "password": password, "email": email};
+    var data = JSON.stringify(userDTO);
+    var config = {
+      method: 'post',
+      url: API_BASE_URL + '/user/sing-up',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    return axios(config);
   }
 
   getCurrentUser() {

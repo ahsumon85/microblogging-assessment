@@ -11,23 +11,19 @@ import com.ahasan.rest.common.messages.BaseResponse;
 import com.ahasan.rest.common.messages.CustomMessage;
 import com.ahasan.rest.common.utils.ApplicationUtils;
 import com.ahasan.rest.common.utils.Topic;
-import com.ahasan.rest.common.utils.UserPermission;
 import com.ahasan.rest.common.utils.UserRole;
 import com.ahasan.rest.dao.LoginDao;
 import com.ahasan.rest.dto.UserDTO;
 import com.ahasan.rest.entity.Permission;
-import com.ahasan.rest.entity.PermissionRole;
-import com.ahasan.rest.entity.PermissionRoleId;
 import com.ahasan.rest.entity.Role;
 import com.ahasan.rest.entity.RoleUser;
 import com.ahasan.rest.entity.RoleUserId;
 import com.ahasan.rest.entity.User;
-import com.ahasan.rest.repo.PermissionRoleRepo;
 import com.ahasan.rest.repo.RoleUserRepo;
 import com.ahasan.rest.repo.UserRepository;
 
 @Service
-@Transactional
+
 public class LoginDaompl extends LoginDao {
 
 	@Autowired
@@ -36,27 +32,22 @@ public class LoginDaompl extends LoginDao {
 	@Autowired
 	private RoleUserRepo roleUserRepo;
 
-	@Autowired
-	private PermissionRoleRepo permissionRoleRepo;
 
-	public BaseResponse userSignUp(UserDTO userDTO) {
-
+	@Transactional
+	public BaseResponse bloggerSignUp(UserDTO userDTO) {
 		try {
 			User user = provideUserInfoFrmUserDto(userDTO);
 			userRepository.save(user);
 
 			RoleUser roleUser = provideUserRole(user);
 			roleUserRepo.save(roleUser);
-
-			PermissionRole permissionRole = providePermissionRole(roleUser.getRole());
-			permissionRoleRepo.save(permissionRole);
-			
 		} catch (DataIntegrityViolationException ex) {
 			throw new CustomDataIntegrityViolationException(ex.getCause().getCause().getMessage());
 		}
 		return new BaseResponse(Topic.USER.getName() + CustomMessage.SIGNUP_SUCCESS_MESSAGE);
 	}
-
+	
+	
 	public User provideUserInfoFrmUserDto(UserDTO userDTO) {
 		User user = new User();
 		user.setUsername(userDTO.getUsername());
@@ -76,15 +67,6 @@ public class LoginDaompl extends LoginDao {
 		roleUser.setRole(provideRoleByRoleId(UserRole.EDITOR.getValue()));
 		roleUser.setUser(user);
 		return roleUser;
-	}
-
-	public PermissionRole providePermissionRole(Role role) {
-		PermissionRole permissionRole = new PermissionRole();
-		PermissionRoleId permissionRoleId = new PermissionRoleId(UserPermission.CREATE.getPermissionId(), role.getId());
-		permissionRole.setId(permissionRoleId);
-		permissionRole.setPermission(providePermissionById(UserPermission.CREATE.getPermissionId()));
-		permissionRole.setRole(role);
-		return permissionRole;
 	}
 
 	public Permission providePermissionById(Integer permisssionId) {
