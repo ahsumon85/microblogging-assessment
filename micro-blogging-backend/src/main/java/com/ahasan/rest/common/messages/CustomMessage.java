@@ -19,5 +19,10 @@ public class CustomMessage {
 	public static final String DOESNOT_EXIT = "Does not exist for given value: ";
 	
 	public static final String SIGNUP_SUCCESS_MESSAGE = " sign up has been saved successfully !";
+	
+	
+	public static final String BLOG_POST_SUCCESS = "blog post has been successfully created!";
+	public static final String BLOG_POST_FAILD = "blog post could not be create successfully!";
+	public static final String BLOG_POST_DELETE = "blog post has been successfully delete!";
 
 }

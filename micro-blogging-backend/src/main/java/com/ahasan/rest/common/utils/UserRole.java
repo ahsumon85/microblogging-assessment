@@ -2,9 +2,9 @@ package com.ahasan.rest.common.utils;
 
 public enum UserRole {
 
-	ADMIN("ROLE_ADMIN", 1),
-	EDITOR("ROLE_EDITOR", 2),
-	OPERATOR("ROLE_OPERATOR", 3);
+	ADMIN("ADMIN", 1),
+	BLOGGER("BLOGGER", 2),
+	GUEST("GUEST", 3);
 	
 	private final String role;
 

@@ -7,17 +7,19 @@ VALUES ('mobile', '{bcrypt}$2a$10$gPhlXZfms0EpNHX0.HHptOhoFD1AoxSr/yUIdTqA8vtjeP
  INSERT
 	INTO
 	permission (NAME)
-VALUES ('CREATE_PROFILE'),
-('READ_PROFILE'),
-('UPDATE_PROFILE'),
-('DELETE_PROFILE');
+VALUES 
+('CREATE'),
+('READ'),
+('UPDATE'),
+('DELETE');
 
  INSERT
 	INTO
 	role (NAME)
-VALUES ('ROLE_ADMIN'),
-('ROLE_EDITOR'),
-('ROLE_OPERATOR');
+VALUES 
+('ADMIN'),
+('BLOGGER'),
+('GUEST');
 
 INSERT
 	INTO

@@ -20,7 +20,6 @@ public class RoleUserId implements Serializable {
 	private Integer userId;
 
 	public RoleUserId() {
-
 	}
 
 	public RoleUserId(Integer roleId, Integer userId) {

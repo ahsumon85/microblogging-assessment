@@ -41,7 +41,7 @@ class AuthService {
     var data = JSON.stringify(userDTO);
     var config = {
       method: 'post',
-      url: API_BASE_URL + '/user/sing-up',
+      url: API_BASE_URL + '/blogger/sing-up',
       headers: { 
         'Content-Type': 'application/json'
       },

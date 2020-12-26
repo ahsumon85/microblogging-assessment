@@ -5,22 +5,22 @@ import UserService from "../services/user.service";
 export default class Home extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      content: ""
+      blogDTO: []
     };
   }
 
   componentDidMount() {
     UserService.getPublicContent().then(
       response => {
+        console.log(JSON.stringify(response.data));
         this.setState({
-          content: response.data
+          blogDTO: response.data
         });
       },
       error => {
         this.setState({
-          content:
+          blogDTO:
             (error.response && error.response.data) ||
             error.message ||
             error.toString()
@@ -33,7 +33,7 @@ export default class Home extends Component {
     return (
       <div className="container">
         <header className="jumbotron">
-          <h3>{this.state.content}</h3>
+          {/* <h3>{this.state.blogDTO}</h3> */}
         </header>
       </div>
     );

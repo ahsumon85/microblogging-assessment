@@ -12,7 +12,7 @@ import com.ahasan.rest.common.messages.CustomMessage;
 import com.ahasan.rest.common.utils.ApplicationUtils;
 import com.ahasan.rest.common.utils.Topic;
 import com.ahasan.rest.common.utils.UserRole;
-import com.ahasan.rest.dao.LoginDao;
+import com.ahasan.rest.dao.UserDao;
 import com.ahasan.rest.dto.UserDTO;
 import com.ahasan.rest.entity.Permission;
 import com.ahasan.rest.entity.Role;
@@ -24,7 +24,7 @@ import com.ahasan.rest.repo.UserRepository;
 
 @Service
 
-public class LoginDaompl extends LoginDao {
+public class UserDaompl extends UserDao {
 
 	@Autowired
 	private UserRepository userRepository;
@@ -62,9 +62,9 @@ public class LoginDaompl extends LoginDao {
 
 	public RoleUser provideUserRole(User user) {
 		RoleUser roleUser = new RoleUser();
-		RoleUserId roleUserId = new RoleUserId(provideRoleByRoleId(UserRole.EDITOR.getValue()).getId(), user.getId());
+		RoleUserId roleUserId = new RoleUserId(provideRoleByRoleId(UserRole.BLOGGER.getValue()).getId(), user.getId());
 		roleUser.setId(roleUserId);
-		roleUser.setRole(provideRoleByRoleId(UserRole.EDITOR.getValue()));
+		roleUser.setRole(provideRoleByRoleId(UserRole.BLOGGER.getValue()));
 		roleUser.setUser(user);
 		return roleUser;
 	}

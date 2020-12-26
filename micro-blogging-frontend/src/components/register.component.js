@@ -103,6 +103,7 @@ export default class Register extends Component {
           });
         },
         error => {
+          const errorMessage = "Sorry username already exists.!";
           const resMessage =
             (error.response &&
               error.response.data &&
@@ -112,7 +113,7 @@ export default class Register extends Component {
 
           this.setState({
             successful: false,
-            message: resMessage
+            message: errorMessage
           });
         }
       );

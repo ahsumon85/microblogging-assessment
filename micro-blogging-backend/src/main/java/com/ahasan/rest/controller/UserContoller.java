@@ -6,28 +6,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ahasan.rest.common.messages.BaseResponse;
+import com.ahasan.rest.common.utils.StaticUrlProvider;
 import com.ahasan.rest.dto.UserDTO;
-import com.ahasan.rest.service.LoginService;
+import com.ahasan.rest.service.UserService;
 
-@CrossOrigin(origins = "http://localhost:8085")
 @Validated
 @RestController
-@RequestMapping("/user")
-public class LoginContoller {
+@RequestMapping(StaticUrlProvider.BLOGGER_URL)
+public class UserContoller {
 	
 	@Autowired
-	private LoginService loginService;
+	private UserService userService;
 	
-	@PostMapping(value = { "/sing-up"})
+	@PostMapping(value = "/sing-up")
 	public ResponseEntity<BaseResponse> bloggerSignUp(@Valid @RequestBody UserDTO userDTO) {
-		BaseResponse response = loginService.bloggerSignUp(userDTO);
+		BaseResponse response = userService.bloggerSignUp(userDTO);
 		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
 

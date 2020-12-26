@@ -2,10 +2,10 @@ package com.ahasan.rest.common.utils;
 
 public enum UserPermission {
 
-	CREATE("CREATE_PROFILE", 1),
-	READ("READ_PROFILE", 2),
-	UPDATE("UPDATE_PROFILE", 3),
-	DELETE("DELETE_PROFILE", 4);
+	CREATE("CREATE", 1),
+	READ("READ", 2),
+	UPDATE("UPDATE", 3),
+	DELETE("DELETE", 4);
 	
 	private final String permission;
 

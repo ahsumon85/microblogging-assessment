@@ -1,11 +1,22 @@
 import axios from 'axios';
 import authHeader from './auth-header';
+import AccessTokenProvider from './access-token-provider'
 
 const API_URL = 'http://localhost:8080/api/test/';
 
+const API_BASE_URL = 'http://localhost:8082';
+
 class UserService {
+
   getPublicContent() {
-    return axios.get(API_URL + 'all');
+    var config = {
+      method: 'get',
+      url: API_BASE_URL + '/blogger/find/post',
+      headers: { 
+        'Authorization': 'Bearer ' + AccessTokenProvider.getAccessToken()
+      }
+    };
+    return axios(config);
   }
 
   getUserBoard() {

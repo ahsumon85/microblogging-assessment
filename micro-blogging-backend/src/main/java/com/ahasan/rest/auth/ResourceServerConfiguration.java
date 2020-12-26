@@ -7,6 +7,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
+import com.ahasan.rest.common.utils.StaticUrlProvider;
+
 /**
  *
  * @author Ahasan Habib
@@ -32,7 +34,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 			http.csrf().disable()
 				.sessionManagement().disable()
 				.authorizeRequests()
-				.antMatchers("/user/sing-up").permitAll()
+				.antMatchers(StaticUrlProvider.BLOGGER_URL + "/sing-up").permitAll()
 				.and()
 				.requestMatchers().antMatchers(SECURED_PATTERN)
 				.and()

@@ -1,14 +1,16 @@
 package com.ahasan.rest.common.utils;
 
-public enum Topic {
+public enum Status {
 	
-	USER("User", 101);
+	ACTIVE("Active", 1),
+	
+	INACTIVE("Inactive", 0);
 
 	private final String name;
 
 	private final int code;
 
-	private Topic(String name, int code) {
+	private Status(String name, int code) {
 		this.name = name;
 		this.code = code;
 	}
