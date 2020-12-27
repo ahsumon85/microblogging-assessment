@@ -23,7 +23,7 @@ VALUES
 
 INSERT
 	INTO
-	permission_role (PERMISSION_ID, ROLE_ID)
+	permission_role (permission_id, role_id)
 VALUES 
 (1, 1),	/*create-> admin */
 (2, 1),	/* read admin */

@@ -165,7 +165,7 @@ public class BloggerServiceImpl extends BloggerDao {
 //			BeanUtils.copyProperties(likeDislikeByBlogId, likeAndDislikeDTO);
 //		}
 //		likeAndDislikeDTO.setBlog(null);
-//		blogDTO.setUser(userDTO);
+		blogDTO.setUser(userDTO);
 		blogDTO.setCreateDate(ApplicationUtils.convertDateToLocalDateTime(blog.getCreateDate()));	
 //		List<CommentDTO> provideCommentDTO = commentListByBlogId.stream().map(comment -> {
 //			CommentDTO commentDTO = new CommentDTO();

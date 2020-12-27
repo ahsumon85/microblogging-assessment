@@ -9,14 +9,24 @@ export default class Profile extends Component {
     this.state = {
       redirect: null,
       userReady: false,
-      currentUser: { username: "" }
+      currentUser: {
+                     username: ""
+      },
+      accessToken: {
+                    access_token: ""
+      }
     };
   }
 
   componentDidMount() {
     const currentUser = AuthService.getCurrentUser();
+    const accessToken = AuthService.getAccessToken();
     if (!currentUser) this.setState({ redirect: "/home" });
-    this.setState({ currentUser: currentUser, userReady: true })
+    this.setState({ 
+      currentUser: currentUser,
+      accessToken: accessToken,
+      userReady: true 
+    })
   }
 
   render() {
@@ -24,7 +34,7 @@ export default class Profile extends Component {
       return <Redirect to={this.state.redirect} />
     }
 
-    const { currentUser } = this.state;
+    const { currentUser, accessToken } = this.state;
 
     return (
       <div className="container">
@@ -36,24 +46,25 @@ export default class Profile extends Component {
           </h3>
         </header>
         <p>
-          <strong>Token:</strong>{" "}
-          {currentUser.access_token}
+          <strong>Token:</strong>{"  "}
+          {accessToken.access_token}
           {/* {currentUser.accessToken.substring(0, 20)} ...{" "}
           {currentUser.accessToken.substr(currentUser.accessToken.length - 20)} */}
         </p>
         <p>
-          <strong>Id:</strong>{" "}
-          {currentUser.id}
+          <strong>Id:</strong>{"  "}
+          {currentUser.username}
         </p>
         <p>
-          <strong>Email:</strong>{" "}
+          <strong>Email:</strong>{"  "}
           {currentUser.email}
         </p>
-        <strong>Authorities:</strong>
-        <ul>
-          {currentUser.roles &&
-            currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
-        </ul>
+        <strong>Authorities:</strong> {"  "}
+        
+          {/* {currentUser.roles &&
+            currentUser.roles.map((role, index) => <li key={index}>{role}</li>)} */}
+            {currentUser.role.name}
+       
       </div>: null}
       </div>
     );

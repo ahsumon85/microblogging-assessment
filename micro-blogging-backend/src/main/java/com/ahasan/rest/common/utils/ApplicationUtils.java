@@ -9,6 +9,8 @@ import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -39,4 +41,9 @@ public class ApplicationUtils {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10, new SecureRandom());
 		return "{bcrypt}" + bCryptPasswordEncoder.encode(plainPassword);
 	}
+	
+	public static String provideCurrentUser() {
+		return SecurityContextHolder.getContext().getAuthentication().getName();
+	}
+	 
 }

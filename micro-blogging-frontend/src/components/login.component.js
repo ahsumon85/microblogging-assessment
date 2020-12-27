@@ -51,10 +51,10 @@ export default class Login extends Component {
     });
 
     this.form.validateAll();
-
+    var token;
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.login(this.state.username, this.state.password).then(
-        () => {
+        response => {
           this.props.history.push("/profile");
           window.location.reload();
         },
@@ -64,9 +64,9 @@ export default class Login extends Component {
             loading: false,
             message: errorMessage
           });
-
         }
       );
+      AuthService.getUserInfoByUsername(this.state.username);
     } else {
       this.setState({
         loading: false

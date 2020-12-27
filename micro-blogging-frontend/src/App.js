@@ -26,13 +26,21 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const user = AuthService.getCurrentUser();
+    const user = AuthService.getCurrentUser()
     if (user) {
-      this.setState({
-        currentUser: user,
-          // showModeratorBoard: user.roles.includes("ROLE_admin"),
-          showAdminBoard: "ROLE_ADMIN",
-      });
+      if (user.role.name == "BLOGGER") {
+        this.setState({
+          currentUser: user,
+          showModeratorBoard: user.role.name,
+          showAdminBoard: "",
+        });
+      } else {
+        this.setState({
+          currentUser: user,
+          showModeratorBoard: "",
+          showAdminBoard:  user.role.name,
+        });
+      }
     }
   }
 
@@ -59,7 +67,7 @@ class App extends Component {
             {showModeratorBoard && (
               <li className="nav-item">
                 <Link to={"/mod"} className="nav-link">
-                  Moderator Board
+                  Blogger Board
                 </Link>
               </li>
             )}
@@ -75,7 +83,7 @@ class App extends Component {
             {currentUser && (
               <li className="nav-item">
                 <Link to={"/user"} className="nav-link">
-                  User
+                  Profile
                 </Link>
               </li>
             )}

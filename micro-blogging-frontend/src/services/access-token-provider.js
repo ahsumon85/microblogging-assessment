@@ -1,6 +1,5 @@
-import React, { Component } from "react";
 
-class AccessTokenProvider {
+export default class AccessTokenProvider {
 
     getAccessToken(){
         const token = JSON.parse(localStorage.getItem('user'));
@@ -8,4 +7,3 @@ class AccessTokenProvider {
     }
 }
 
-export default new AccessTokenProvider();

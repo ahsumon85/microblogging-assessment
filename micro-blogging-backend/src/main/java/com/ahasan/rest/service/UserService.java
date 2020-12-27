@@ -17,4 +17,8 @@ public class UserService {
 		return userDao.bloggerSignUp(userDTO);
 	}
 
+	public UserDTO getUserInfoByUserName(String username) {
+		return userDao.getUserInfoByUserName(username);
+	}
+
 }

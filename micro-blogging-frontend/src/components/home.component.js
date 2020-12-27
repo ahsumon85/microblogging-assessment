@@ -1,26 +1,27 @@
 import React, { Component } from "react";
 
 import UserService from "../services/user.service";
+import Table from './table.component'
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      blogDTO: []
+      blogList: []
     };
   }
 
   componentDidMount() {
-    UserService.getPublicContent().then(
+    UserService.getBloggerContent().then(
       response => {
         console.log(JSON.stringify(response.data));
         this.setState({
-          blogDTO: response.data
+          blogList: response.data
         });
       },
       error => {
         this.setState({
-          blogDTO:
+          blogList:
             (error.response && error.response.data) ||
             error.message ||
             error.toString()
@@ -29,13 +30,23 @@ export default class Home extends Component {
     );
   }
 
+  tabRow() {
+    return this.state.blogList.map(function (object, i) {
+        return <Table blog={object} key={i} />;
+    });
+}
+
   render() {
     return (
       <div className="container">
         <header className="jumbotron">
-          {/* <h3>{this.state.blogDTO}</h3> */}
+          <table className="table" >
+                  <tbody>
+                      {this.tabRow()}
+                  </tbody>
+          </table>
         </header>
-      </div>
+      </div>         
     );
   }
 }
