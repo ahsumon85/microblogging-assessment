@@ -12,21 +12,21 @@ class Table extends Component {
     // }
     render() {
         return (
-            <tr>
-                <tr>
-                     <td>
-                        {this.props.blog.user.email}
-                    </td>
-                    <td>
-                        {this.props.blog.createDate}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        {this.props.blog.content}
-                    </td>
-                </tr>
-            </tr>
+            <tbody>
+                    <tr style={{backgroundColor:'#848482'}}>
+                        <td>
+                            {this.props.blog.user.email}
+                        </td>
+                        <td>
+                            {this.props.blog.createDate}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {this.props.blog.content}
+                        </td>
+                    </tr>
+            </tbody>
         );
     }
 }

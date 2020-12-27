@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import UserService from "../services/user.service";
 
-export default class BoardModerator extends Component {
+export default class BoardBlogger extends Component {
   constructor(props) {
     super(props);
 

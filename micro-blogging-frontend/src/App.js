@@ -9,7 +9,7 @@ import Login from "./components/login.component";
 import Register from "./components/register.component";
 import Home from "./components/home.component";
 import Profile from "./components/profile.component";
-import BoardModerator from "./components/board-moderator.component";
+import BoardBlogger from "./components/board-blogger.component";
 import BoardAdmin from "./components/board-admin.component";
 
 class App extends Component {
@@ -54,7 +54,7 @@ class App extends Component {
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <Link to={"/"} className="navbar-brand">
-            Micro-Bloggging
+            Micro-Blogging
           </Link>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
@@ -97,7 +97,7 @@ class App extends Component {
               </li>
               <li className="nav-item">
                 <a href="/login" className="nav-link" onClick={this.logOut}>
-                  LogOut
+                  Log out
                 </a>
               </li>
             </div>
@@ -125,7 +125,7 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/profile" component={Profile} />
             <Route path="/user" component={Profile} />
-            <Route path="/mod" component={BoardModerator} />
+            <Route path="/mod" component={BoardBlogger} />
             <Route path="/admin" component={BoardAdmin} />
           </Switch>
         </div>

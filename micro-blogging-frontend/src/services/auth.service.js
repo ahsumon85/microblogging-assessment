@@ -1,5 +1,4 @@
 import axios from "axios";
-import AccessTokenProvider from './access-token-provider'
 
 const API_BASE_URL = "http://localhost:8082";
 
@@ -56,6 +55,7 @@ class AuthService {
     return axios(config);
   }
 
+  
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('user'));
   }

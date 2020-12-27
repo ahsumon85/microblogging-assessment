@@ -104,7 +104,6 @@ export default class Register extends Component {
         },
         error => {
           const errorMessage = "Sorry username already exists.!";
-          const resMessage =
             (error.response &&
               error.response.data &&
               error.response.data.message) ||

@@ -51,7 +51,6 @@ export default class Login extends Component {
     });
 
     this.form.validateAll();
-    var token;
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.login(this.state.username, this.state.password).then(
         response => {

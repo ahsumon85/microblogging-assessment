@@ -39,28 +39,30 @@ export default class Profile extends Component {
     return (
       <div className="container">
         {(this.state.userReady) ?
-        <div>
-        <header className="jumbotron">
-          <h3>
-            <strong>{currentUser.username}</strong> Profile
-          </h3>
-        </header>
-        <p>
-          <strong>Token:</strong>{"  "}
-          {accessToken.access_token}
-        </p>
-        <p>
-          <strong>Id:</strong>{"  "}
-          {currentUser.username}
-        </p>
-        <p>
-          <strong>Email:</strong>{"  "}
-          {currentUser.email}
-        </p>
-        <strong>Authorities:</strong> {"  "}
-            {currentUser.role.name}
-      </div>: null}
-      </div>
+        <div className="jumbotron" >
+          <div style={{marginLeft: '15rem'}}>
+            <header >
+              <h3 style={{marginLeft: '2rem'}}>
+                <strong>{currentUser.username}</strong> Profile
+              </h3>
+            </header>
+            <p>
+              <strong>Token:</strong>{"  "}
+              {accessToken.access_token}
+            </p>
+            <p>
+              <strong>Id:</strong>{"  "}
+              {currentUser.username}
+            </p>
+            <p>
+              <strong>Email:</strong>{"  "}
+              {currentUser.email}
+            </p>
+            <strong>Authorities:</strong> {"  "}
+                {currentUser.role.name}
+          </div>
+        </div>: null}
+        </div>
     );
   }
 }
