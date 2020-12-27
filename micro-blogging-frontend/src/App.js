@@ -9,7 +9,6 @@ import Login from "./components/login.component";
 import Register from "./components/register.component";
 import Home from "./components/home.component";
 import Profile from "./components/profile.component";
-import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
 
@@ -19,7 +18,7 @@ class App extends Component {
     this.logOut = this.logOut.bind(this);
 
     this.state = {
-      showModeratorBoard: false,
+      showBloggerBoard: false,
       showAdminBoard: false,
       currentUser: undefined,
     };
@@ -28,16 +27,16 @@ class App extends Component {
   componentDidMount() {
     const user = AuthService.getCurrentUser()
     if (user) {
-      if (user.role.name == "BLOGGER") {
+      if (user.role.name === "BLOGGER") {
         this.setState({
           currentUser: user,
-          showModeratorBoard: user.role.name,
+          showBloggerBoard: user.role.name,
           showAdminBoard: "",
         });
       } else {
         this.setState({
           currentUser: user,
-          showModeratorBoard: "",
+          showBloggerBoard: "",
           showAdminBoard:  user.role.name,
         });
       }
@@ -49,7 +48,7 @@ class App extends Component {
   }
 
   render() {
-    const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
+    const { currentUser, showBloggerBoard, showAdminBoard } = this.state;
 
     return (
       <div>
@@ -64,7 +63,7 @@ class App extends Component {
               </Link>
             </li>
 
-            {showModeratorBoard && (
+            {showBloggerBoard && (
               <li className="nav-item">
                 <Link to={"/mod"} className="nav-link">
                   Blogger Board
