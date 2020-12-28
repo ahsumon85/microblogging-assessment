@@ -14,7 +14,7 @@ class AuthService {
       method: 'post',
       url: API_BASE_URL + '/oauth/token',
       headers: { 
-        'Authorization': 'Basic bW9iaWxlOnBpbg=='
+        'Authorization': 'Basic Y2xpZW50LWlkOmNsaWVudC1wYXNz'
       },
       data : data
     }
@@ -62,6 +62,11 @@ class AuthService {
 
   getAccessToken(){
     return JSON.parse(localStorage.getItem('token'));
+  }
+
+  getCurrentUserName() {
+    const user = JSON.parse(localStorage.getItem('user'))
+    return  user.username; 
   }
 }
 

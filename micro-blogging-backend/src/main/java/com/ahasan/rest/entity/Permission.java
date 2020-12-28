@@ -2,6 +2,7 @@ package com.ahasan.rest.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *

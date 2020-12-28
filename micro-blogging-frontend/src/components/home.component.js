@@ -73,10 +73,7 @@ export default class Home extends Component {
     if (this.checkBtn.context._errors.length === 0) {
       UserService.blogPostByBlogger(this.state.content)
           .then(response => {
-              this.setState({
-                message: response.data.message,
-                successful: true
-              });
+              window.location.reload();
             },
             error => {
               const errorMessage = "Please try again";

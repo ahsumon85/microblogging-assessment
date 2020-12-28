@@ -20,14 +20,17 @@ import com.ahasan.rest.dto.UserDTO;
 import com.ahasan.rest.entity.Blog;
 import com.ahasan.rest.entity.User;
 import com.ahasan.rest.repo.BlogRepository;
+import com.ahasan.rest.repo.UserRepository;
 
 
 @Service
-
 public class BloggerServiceImpl extends BloggerDao {
 
 	@Autowired
 	private BlogRepository blogRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 //	@Autowired
 //	private CommentRepository commentRepository;
@@ -119,11 +122,12 @@ public class BloggerServiceImpl extends BloggerDao {
 //	
 //	
 	private Blog copyBlogDtoToBlog(@Valid BlogDTO blogDTO) {
+		User user = userRepository.findByUsername(ApplicationUtils.provideCurrentUserName()).get();
 		Blog blog = new Blog();
 		BeanUtils.copyProperties(blogDTO, blog);
 		blog.setPublish(Status.ACTIVE.getCode());
 		blog.setActiveStatus(Status.ACTIVE.getCode());
-		blog.setUser(provideUserByUserId(blogDTO.getUser().getId()));
+		blog.setUser(user);
 		return blog;
 	}
 

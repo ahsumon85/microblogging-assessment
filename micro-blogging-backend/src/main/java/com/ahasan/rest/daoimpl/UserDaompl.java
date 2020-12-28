@@ -23,6 +23,7 @@ import com.ahasan.rest.entity.Role;
 import com.ahasan.rest.entity.RoleUser;
 import com.ahasan.rest.entity.RoleUserId;
 import com.ahasan.rest.entity.User;
+import com.ahasan.rest.repo.RoleRepo;
 import com.ahasan.rest.repo.RoleUserRepo;
 import com.ahasan.rest.repo.UserRepository;
 
@@ -35,6 +36,9 @@ public class UserDaompl extends UserDao {
 
 	@Autowired
 	private RoleUserRepo roleUserRepo;
+	
+	@Autowired
+	private RoleRepo roleRepo;
 
 	@Override
 	public UserDTO getUserInfoByUserName(String username) {
@@ -70,9 +74,10 @@ public class UserDaompl extends UserDao {
 
 	public RoleUser provideUserRoleFrmUser(User user) {
 		RoleUser roleUser = new RoleUser();
-		RoleUserId roleUserId = new RoleUserId(provideRoleByRoleId(UserRole.BLOGGER.getValue()).getId(), user.getId());
+		Role role = roleRepo.findByName(UserRole.BLOGGER.getRole());
+		RoleUserId roleUserId = new RoleUserId(role.getId(), user.getId());
 		roleUser.setId(roleUserId);
-		roleUser.setRole(provideRoleByRoleId(UserRole.BLOGGER.getValue()));
+		roleUser.setRole(role);
 		roleUser.setUser(user);
 		return roleUser;
 	}

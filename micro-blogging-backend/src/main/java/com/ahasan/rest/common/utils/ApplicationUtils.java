@@ -8,17 +8,26 @@ package com.ahasan.rest.common.utils;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.ahasan.rest.daoimpl.AuthUserDetail;
+import com.ahasan.rest.entity.User;
+import com.ahasan.rest.repo.UserRepository;
 
 /**
  *
  * @author Ahasan Habib
  */
 public class ApplicationUtils {
+
 
 	public static Boolean isPasswordValid(String databasedPass, String givenPassword) {
 		if (BCrypt.checkpw(databasedPass, givenPassword)) {
@@ -41,9 +50,9 @@ public class ApplicationUtils {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10, new SecureRandom());
 		return "{bcrypt}" + bCryptPasswordEncoder.encode(plainPassword);
 	}
-	
-	public static String provideCurrentUser() {
+
+	public static String provideCurrentUserName() {
 		return SecurityContextHolder.getContext().getAuthentication().getName();
 	}
-	 
+
 }

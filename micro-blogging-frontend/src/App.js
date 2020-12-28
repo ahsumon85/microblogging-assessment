@@ -65,7 +65,7 @@ class App extends Component {
 
             {showBloggerBoard && (
               <li className="nav-item">
-                <Link to={"/mod"} className="nav-link">
+                <Link to={"/blogger"} className="nav-link">
                   Blogger Board
                 </Link>
               </li>
@@ -125,7 +125,7 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/profile" component={Profile} />
             <Route path="/user" component={Profile} />
-            <Route path="/mod" component={BoardBlogger} />
+            <Route path="/blogger" component={BoardBlogger} />
             <Route path="/admin" component={BoardAdmin} />
           </Switch>
         </div>
