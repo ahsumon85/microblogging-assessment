@@ -18,6 +18,7 @@ import com.ahasan.rest.common.messages.BaseResponse;
 import com.ahasan.rest.common.utils.StaticUrlProvider;
 import com.ahasan.rest.common.utils.Status;
 import com.ahasan.rest.dto.BlogDTO;
+import com.ahasan.rest.dto.UpAndDownvoteDTO;
 import com.ahasan.rest.service.BloggerService;
 
 
@@ -29,20 +30,18 @@ public class BloggerPostController {
 	@Autowired
 	private BloggerService bloggerService;
 
-//	@PreAuthorize("hasRole('ROLE_BLOGGER')")
 	@PostMapping("/post/create")
 	public ResponseEntity<BaseResponse> createBlogPostByBlogger(@Valid @RequestBody BlogDTO blogDTO) {
 		BaseResponse response = bloggerService.createBlogPostByBlogger(blogDTO);
 		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
 	
-//	@PreAuthorize("hasRole('ROLE_BLOGGER')")
-//	@PostMapping("/like/post")
-//	public ResponseEntity<BaseResponse> likeAndDisOtherBloggerPost(@Valid @RequestBody LikeAndDislikeDTO likeAndDislikeDTO) {
-//		BaseResponse response = bloggerService.likeAndDislikeOtherApprvPost(likeAndDislikeDTO);
-//		return new ResponseEntity<>(response, HttpStatus.CREATED);
-//	}
-//	
+	@PostMapping("/vote/post")
+	public ResponseEntity<BaseResponse> upAndDownvote(@Valid @RequestBody UpAndDownvoteDTO upAndDownvoteDTO) {
+		BaseResponse response = bloggerService.upAndDownvote(upAndDownvoteDTO);
+		return new ResponseEntity<>(response, HttpStatus.CREATED);
+	}
+
 //	@PreAuthorize("hasRole('ROLE_BLOGGER') or hasRole('ROLE_ADMIN')")
 //	@PostMapping("/comment/post")
 //	public ResponseEntity<BaseResponse> commentOtherBloggerPost(@Valid @RequestBody CommentDTO commentDTO) {
@@ -60,8 +59,8 @@ public class BloggerPostController {
 //	
 //	@PreAuthorize("hasRole('ROLE_BLOGGER') or hasRole('ROLE_ADMIN')")
 	@GetMapping(value = "/find/post")
-	public ResponseEntity<List<BlogDTO>> findAllApproedBloggerPost() {
-		List<BlogDTO> list = bloggerService.findAllApproedBloggerPost(Status.ACTIVE.getCode(), Status.ACTIVE.getCode());
+	public ResponseEntity<List<BlogDTO>> findAllBloggerPostByStatus() {
+		List<BlogDTO> list = bloggerService.findAllBloggerPostByStatus(Status.ACTIVE.getCode(), Status.ACTIVE.getCode());
 		return new ResponseEntity<List<BlogDTO>>(list, HttpStatus.OK);
 	}
 	

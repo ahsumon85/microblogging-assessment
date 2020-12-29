@@ -1,20 +1,26 @@
 package com.ahasan.rest.dto;
 
+import java.util.List;
+
 public class BlogDTO {
 
 	private Long blogId;
 
-	private String content;
+	private String contentTitle;
 
-	private Integer activeStatus;
+	private String content;
 
 	private Integer publish;
 
 	private String createDate;
 
-//	private LikeAndDislikeDTO bloggerLikeDislikes;
+	private Long totalUpVote;
+
+	private Long totaldownVote;
+
+	private List<UpAndDownvoteDTO> upAndDownvote;;
 //
-//	private List<CommentDTO> bloggerComment;
+	private List<CommentDTO> bloggerComment;
 
 	private UserDTO user;
 
@@ -32,14 +38,6 @@ public class BlogDTO {
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public Integer getActiveStatus() {
-		return activeStatus;
-	}
-
-	public void setActiveStatus(Integer activeStatus) {
-		this.activeStatus = activeStatus;
 	}
 
 	public Integer getPublish() {
@@ -66,5 +64,44 @@ public class BlogDTO {
 		this.user = user;
 	}
 
-	
+	public List<UpAndDownvoteDTO> getUpAndDownvote() {
+		return upAndDownvote;
+	}
+
+	public void setUpAndDownvote(List<UpAndDownvoteDTO> upAndDownvote) {
+		this.upAndDownvote = upAndDownvote;
+	}
+
+	public Long getTotalUpVote() {
+		return totalUpVote;
+	}
+
+	public void setTotalUpVote(Long totalUpVote) {
+		this.totalUpVote = totalUpVote;
+	}
+
+	public Long getTotaldownVote() {
+		return totaldownVote;
+	}
+
+	public void setTotaldownVote(Long totaldownVote) {
+		this.totaldownVote = totaldownVote;
+	}
+
+	public String getContentTitle() {
+		return contentTitle;
+	}
+
+	public void setContentTitle(String contentTitle) {
+		this.contentTitle = contentTitle;
+	}
+
+	public List<CommentDTO> getBloggerComment() {
+		return bloggerComment;
+	}
+
+	public void setBloggerComment(List<CommentDTO> bloggerComment) {
+		this.bloggerComment = bloggerComment;
+	}
+
 }

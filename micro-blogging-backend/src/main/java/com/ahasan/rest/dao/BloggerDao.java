@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import com.ahasan.rest.common.messages.BaseResponse;
 import com.ahasan.rest.dto.BlogDTO;
+import com.ahasan.rest.dto.UpAndDownvoteDTO;
 
 
 public abstract class BloggerDao {
@@ -14,7 +15,9 @@ public abstract class BloggerDao {
 
 //	public BaseResponse deleteOwnBlogPostById(int userId, long blogId);
 //	
-	public abstract List<BlogDTO> findAllApproedBloggerPost(int status, int publish);
+	public abstract List<BlogDTO> findAllBloggerPostByStatus(int publish, Integer status);
+
+	public abstract BaseResponse upAndDownvote(UpAndDownvoteDTO upAndDownvoteDTO);
 	
 //	public BaseResponse likeAndDislikeOtherApprvPost(LikeAndDislikeDTO likeAndDislikeDTO);
 //	

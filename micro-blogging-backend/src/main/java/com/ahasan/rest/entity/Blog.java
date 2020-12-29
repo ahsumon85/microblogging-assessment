@@ -20,10 +20,8 @@ public class Blog {
 	@Column(name = "content", columnDefinition = "TEXT")
 	private String content;
 
-	@Min(value = 0, message = "active status field must be input 0 or 1")
-	@Max(value = 1, message = "active status field must be input 0 or 1")
-	@Column(name = "active_status", nullable = false, length = 1)
-	private Integer activeStatus;
+	@Column(name = "content_itle")
+	private String contentTitle;
 
 	@Min(value = 0, message = "active status field must be input 0 or 1")
 	@Max(value = 1, message = "active status field must be input 0 or 1")
@@ -53,13 +51,7 @@ public class Blog {
 		this.content = content;
 	}
 
-	public Integer getActiveStatus() {
-		return activeStatus;
-	}
 
-	public void setActiveStatus(Integer activeStatus) {
-		this.activeStatus = activeStatus;
-	}
 
 	public Integer getPublish() {
 		return publish;
@@ -83,6 +75,14 @@ public class Blog {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public String getContentTitle() {
+		return contentTitle;
+	}
+
+	public void setContentTitle(String contentTitle) {
+		this.contentTitle = contentTitle;
 	}
 
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ahasan.rest.common.messages.BaseResponse;
 import com.ahasan.rest.dao.BloggerDao;
 import com.ahasan.rest.dto.BlogDTO;
+import com.ahasan.rest.dto.UpAndDownvoteDTO;
 
 @Service
 public class BloggerService {
@@ -21,13 +22,13 @@ public class BloggerService {
 		return bloggerDao.createBlogPostByBlogger(blogDTO);
 	}
 
-//	public BaseResponse deleteOwnBlogPostById(int userId, long blogId);
-//	
-	public List<BlogDTO> findAllApproedBloggerPost(int status, int publish){
-		return bloggerDao.findAllApproedBloggerPost(status, publish);
+	public List<BlogDTO> findAllBloggerPostByStatus(int publish, Integer status){
+		return bloggerDao.findAllBloggerPostByStatus(publish, status);
 	}
-	
-//	public BaseResponse likeAndDislikeOtherApprvPost(LikeAndDislikeDTO likeAndDislikeDTO);
-//	
+
+	public BaseResponse upAndDownvote(UpAndDownvoteDTO upAndDownvoteDTO) {
+		return bloggerDao.upAndDownvote(upAndDownvoteDTO);
+	}
+
 //	public BaseResponse commentOtherApprovedPost(CommentDTO commentDTO);
 }

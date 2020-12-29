@@ -28,8 +28,6 @@ services:
     build:
       context: ./react-js-example/ # Use an image built from the specified dockerfile in the `polling-app-client` directory.
       dockerfile: Dockerfile
-      args:
-        REACT_APP_API_BASE_URL: http://127.0.0.1:8081/api
     ports:
       - "9090:80" # Map the exposed port 80 on the container to port 9090 on the host machine
     restart: always
