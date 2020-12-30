@@ -138,6 +138,18 @@ export default class Register extends Component {
             {!this.state.successful && (
               <div>
                 <div className="form-group">
+                  <label htmlFor="email">Blogger Name</label>
+                  <Input
+                    type="text"
+                    className="form-control"
+                    name="email"
+                    value={this.state.email}
+                    onChange={this.onChangeEmail}
+                    validations={[required]}
+                  />
+                </div>
+
+                <div className="form-group">
                   <label htmlFor="username">Username</label>
                   <Input
                     type="text"
@@ -146,18 +158,6 @@ export default class Register extends Component {
                     value={this.state.username}
                     onChange={this.onChangeUsername}
                     validations={[required, vusername]}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <Input
-                    type="text"
-                    className="form-control"
-                    name="email"
-                    value={this.state.email}
-                    onChange={this.onChangeEmail}
-                    validations={[required, email]}
                   />
                 </div>
 

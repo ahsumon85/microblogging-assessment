@@ -19,6 +19,12 @@ public abstract class BloggerDao {
 
 	public abstract BaseResponse upAndDownvote(UpAndDownvoteDTO upAndDownvoteDTO);
 	
+	public abstract BaseResponse deleteOwnBlogPostById(Long blogId);
+	
+	public abstract List<BlogDTO> findAllBLoggerPostUserName(String username);
+
+	public abstract BaseResponse approvedUpAndDownvote(UpAndDownvoteDTO upAndDownvoteDTO);
+	
 //	public BaseResponse likeAndDislikeOtherApprvPost(LikeAndDislikeDTO likeAndDislikeDTO);
 //	
 //	public BaseResponse commentOtherApprovedPost(CommentDTO commentDTO);

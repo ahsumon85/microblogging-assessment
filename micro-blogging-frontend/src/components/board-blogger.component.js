@@ -31,12 +31,13 @@ export default class BoardBlogger extends Component {
       currentUser: {
               username: ""
         },
+      isDelete: true
     };
   }
 
   componentDidMount() {
     const currentUser = AuthService.getCurrentUser();
-    UserService.getBloggerContent().then(
+    UserService.getBLogerPostByBloggerName().then(
       response => {
         this.setState({
           currentUser: currentUser,

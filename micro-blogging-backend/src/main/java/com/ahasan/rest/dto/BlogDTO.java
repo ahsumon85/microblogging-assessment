@@ -18,11 +18,13 @@ public class BlogDTO {
 
 	private Long totaldownVote;
 
-	private List<UpAndDownvoteDTO> upAndDownvote;;
-//
+	private List<UpAndDownvoteDTO> upAndDownvote;
+
 	private List<CommentDTO> bloggerComment;
 
 	private UserDTO user;
+
+	private int isShowAdminBoard;
 
 	public Long getBlogId() {
 		return blogId;
@@ -102,6 +104,14 @@ public class BlogDTO {
 
 	public void setBloggerComment(List<CommentDTO> bloggerComment) {
 		this.bloggerComment = bloggerComment;
+	}
+
+	public int getIsShowAdminBoard() {
+		return isShowAdminBoard;
+	}
+
+	public void setIsShowAdminBoard(int isShowAdminBoard) {
+		this.isShowAdminBoard = isShowAdminBoard;
 	}
 
 }

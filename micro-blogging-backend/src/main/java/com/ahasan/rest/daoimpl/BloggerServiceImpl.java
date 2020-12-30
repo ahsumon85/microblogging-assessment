@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ahasan.rest.common.exceptions.RecordNotFoundException;
 import com.ahasan.rest.common.messages.BaseResponse;
 import com.ahasan.rest.common.messages.CustomMessage;
 import com.ahasan.rest.common.utils.ApplicationUtils;
@@ -52,6 +53,26 @@ public class BloggerServiceImpl extends BloggerDao {
 		return new BaseResponse(CustomMessage.BLOG_POST_SUCCESS);
 	}
 
+	public List<BlogDTO> findAllBLoggerPostUserName(String username) {
+		List<Blog> bloggerPostList = blogRepository.findByUser_Username(username);
+		List<UpAndDownvote> upAndDownvoteList = upAndDownVoteRepository.findAll();
+		List<Comment> blogComment = commentRepository.findAll();
+		return bloggerPostList.stream()
+				.map(blog -> provideBlogToBlogDto(blog, upAndDownvoteList, blogComment, Status.ACTIVE.getCode()))
+				.collect(Collectors.toList());
+	}
+
+	public BaseResponse deleteOwnBlogPostById(Long blogId) {
+		if (blogRepository.existsById(blogId)) {
+//			likeAndDislikeRepository.deleteByBlog_BlogId(blogId);
+//			commentRepository.deleteByBlog_BlogId(blogId);
+			blogRepository.deleteById(blogId);
+		} else {
+			throw new RecordNotFoundException(CustomMessage.NO_RECOURD_FOUND + blogId);
+		}
+		return new BaseResponse(CustomMessage.BLOG_POST_DELETE);
+	}
+
 //	@Override
 //	public BaseResponse deleteOwnBlogPostById(int userId, long blogId) {
 //		if (blogRepository.existsByBlogId((int) blogId)) {
@@ -80,13 +101,13 @@ public class BloggerServiceImpl extends BloggerDao {
 		UserDTO userDTO = new UserDTO();
 		List<CommentDTO> commentListByBlogId = blogComment.stream()
 				.filter(com -> com.getBlog().getBlogId() == blog.getBlogId())
-				.map(comment -> GeneralUtils.copyCommentDtoToEntity(comment))
-				.collect(Collectors.toList());
-		
+				.map(comment -> GeneralUtils.copyCommentDtoToEntity(comment)).collect(Collectors.toList());
+
 		List<UpAndDownvoteDTO> currentUpAndDownvoteDTOs = upAndDownvoteList.stream()
 				.filter(vote -> vote.getBlog().getBlogId() == blog.getBlogId())
 				.filter(status -> status.getApproved() == active)
 				.map(vodtDto -> GeneralUtils.provideUpAndDownvoteEntityToDto(vodtDto)).collect(Collectors.toList());
+
 		BeanUtils.copyProperties(blog, blogDTO);
 		BeanUtils.copyProperties(blog.getUser(), userDTO);
 		blogDTO.setUser(userDTO);
@@ -102,15 +123,38 @@ public class BloggerServiceImpl extends BloggerDao {
 				.filter(x -> x.getDownvote() != null).filter(vote -> vote.getDownvote() == Status.ACTIVE.getCode())
 				.collect(Collectors.toList());
 		Long totalDownVote = !totalDownvoteDtos.isEmpty() ? totalDownvoteDtos.stream().count() : null;
+		blogDTO.setIsShowAdminBoard(!currentUpAndDownvoteDTOs.isEmpty() ? 1 : 0);
 		blogDTO.setTotalUpVote(totalUpVote);
 		blogDTO.setTotaldownVote(totalDownVote);
 		return blogDTO;
 	}
 
 	public BaseResponse upAndDownvote(UpAndDownvoteDTO upAndDownvoteDTO) {
-		UpAndDownvote upAndDownvote = GeneralUtils.copyUpAndDownvoteDtoToEntity(upAndDownvoteDTO);
-		upAndDownvote.setApproved(Status.INACTIVE.getCode());
-		upAndDownVoteRepository.save(upAndDownvote);
+		UpAndDownvote upAndDownvote = upAndDownVoteRepository.findByBlog_BlogIdAndUser_Id(
+				upAndDownvoteDTO.getBlog().getBlogId(), upAndDownvoteDTO.getUser().getId());
+		if (upAndDownvote == null) {
+			UpAndDownvote providedupAndDownvote = GeneralUtils.copyUpAndDownvoteDtoToEntity(upAndDownvoteDTO);
+			providedupAndDownvote.setApproved(Status.INACTIVE.getCode());
+			upAndDownVoteRepository.save(providedupAndDownvote);
+		} else {
+			if (upAndDownvote.getDownvote() != null) {
+				upAndDownvote.setUpvote(Status.ACTIVE.getCode());
+				upAndDownvote.setDownvote(null);
+			} else {
+				
+				upAndDownvote.setDownvote(Status.ACTIVE.getCode());
+				upAndDownvote.setUpvote(null);
+			}
+			upAndDownvote.setApproved(Status.INACTIVE.getCode());
+			upAndDownVoteRepository.save(upAndDownvote);
+		}
+
+		return new BaseResponse(CustomMessage.VOTE_UNVOTE_MESSAGE);
+	}
+
+	@Transactional
+	public BaseResponse approvedUpAndDownvote(UpAndDownvoteDTO upAndDownvoteDTO) {
+		upAndDownVoteRepository.approvePaddingVote(upAndDownvoteDTO.getUpAndDownVoteId(), Status.ACTIVE.getCode());
 		return new BaseResponse(CustomMessage.VOTE_UNVOTE_MESSAGE);
 	}
 
@@ -122,6 +166,5 @@ public class BloggerServiceImpl extends BloggerDao {
 //	
 //	
 //	
-
 
 }

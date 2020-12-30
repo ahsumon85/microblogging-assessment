@@ -29,6 +29,18 @@ public class BloggerService {
 	public BaseResponse upAndDownvote(UpAndDownvoteDTO upAndDownvoteDTO) {
 		return bloggerDao.upAndDownvote(upAndDownvoteDTO);
 	}
+	
+	public BaseResponse deleteOwnBlogPostById(Long blogId) {
+		return bloggerDao.deleteOwnBlogPostById(blogId);
+	}
+	
+	public List<BlogDTO> findAllBLoggerPostUserName(String username) {
+		return bloggerDao.findAllBLoggerPostUserName(username);
+	}
+
+	public BaseResponse approvedUpAndDownvote(UpAndDownvoteDTO upAndDownvoteDTO) {
+		return bloggerDao.approvedUpAndDownvote(upAndDownvoteDTO);
+	}
 
 //	public BaseResponse commentOtherApprovedPost(CommentDTO commentDTO);
 }

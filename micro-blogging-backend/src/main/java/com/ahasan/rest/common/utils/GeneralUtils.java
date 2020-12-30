@@ -34,14 +34,22 @@ public class GeneralUtils {
 	public static CommentDTO copyCommentDtoToEntity(Comment comment) {
 		CommentDTO commentDTO = new CommentDTO();
 		BeanUtils.copyProperties(commentDTO, comment);
-		commentDTO.setUser( provideUserToUserDto(comment.getUser()));
+		commentDTO.setUser(provideUserToUserDto(comment.getUser()));
 		return commentDTO;
 	}
 
-	public static UpAndDownvoteDTO provideUpAndDownvoteEntityToDto(UpAndDownvote UpAndDownvote) {
+	public static UpAndDownvoteDTO provideUpAndDownvoteEntityToDto(UpAndDownvote upAndDownvote) {
 		UpAndDownvoteDTO upAndDownvoteDTO = new UpAndDownvoteDTO();
-		BeanUtils.copyProperties(UpAndDownvote, upAndDownvoteDTO);
+		BeanUtils.copyProperties(upAndDownvote, upAndDownvoteDTO);
+//		upAndDownvoteDTO.setBlog( provideBlogEntityToDto(upAndDownvote.getBlog()));
+		upAndDownvoteDTO.setUser(provideUserToUserDto(upAndDownvote.getUser()));
 		return upAndDownvoteDTO;
+	}
+	
+	public static BlogDTO provideBlogEntityToDto(Blog blog) {
+		BlogDTO blogDTO = new BlogDTO();
+		BeanUtils.copyProperties(blog, blogDTO);
+		return blogDTO;
 	}
 
 	public static UpAndDownvote copyUpAndDownvoteDtoToEntity(UpAndDownvoteDTO upAndDownvoteDTO) {
@@ -56,6 +64,7 @@ public class GeneralUtils {
 		Blog blog = new Blog();
 		BeanUtils.copyProperties(blogDTO, blog);
 		blog.setPublish(Status.ACTIVE.getCode());
+		blog.setContentTitle(ApplicationUtils.convertCamelcaseString(blogDTO.getContentTitle()));
 		return blog;
 	}
 
