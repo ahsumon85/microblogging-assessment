@@ -29,14 +29,26 @@ password: **admin**
 
 ### **System Installation guideline:**
 
+**Host Machine deployment:**
+
+1. Project clone from **github** by using the given URL **https://github.com/ahsumon85/microblogging-assessment.git**
+2. Need to install **MySQL** Database to run Backend service
+3. Follow the **micro-blogging-backend/src/main/resources/application.properties** and make sure database **username** & **password**
+4. Then will run using IDE STS
+5. Follow the link to see API **http://localhost:8082/swagger-ui.html**
+
+**Docker deployment:**
+
 1. Project clone from **github** by using the given URL **https://github.com/ahsumon85/microblogging-assessment.git**
 
-2. Need to install **MySQL** Database to run Backend service
+2. Go to the **micro-blogging-backend/src/main/resources/application.properties** and change **mysqldb** instead of **localhost** and also add **blog-server** instead of localhost.
 
-3. Follow the **micro-blogging-backend/src/main/resources/application.properties** and make sure database **username** & **password**
+3. git to the $ cd **micro-blogging-backend/** and **$ mav clean install** to build java project
 
-4. Then will run using IDE STS
+4. **$ pwd**
 
-5. Also provide a jaso file which have **API** Testing information
+   /home/ahasan/Desktop/microblogging-assessment
 
-6. Follow the link to see API **http://localhost:8082/swagger-ui.html**
+5. **$ docker-compose up**
+
+6. **$ docker ps**
