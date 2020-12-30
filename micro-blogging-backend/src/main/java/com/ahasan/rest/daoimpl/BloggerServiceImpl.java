@@ -62,30 +62,6 @@ public class BloggerServiceImpl extends BloggerDao {
 				.collect(Collectors.toList());
 	}
 
-	public BaseResponse deleteOwnBlogPostById(Long blogId) {
-		if (blogRepository.existsById(blogId)) {
-//			likeAndDislikeRepository.deleteByBlog_BlogId(blogId);
-//			commentRepository.deleteByBlog_BlogId(blogId);
-			blogRepository.deleteById(blogId);
-		} else {
-			throw new RecordNotFoundException(CustomMessage.NO_RECOURD_FOUND + blogId);
-		}
-		return new BaseResponse(CustomMessage.BLOG_POST_DELETE);
-	}
-
-//	@Override
-//	public BaseResponse deleteOwnBlogPostById(int userId, long blogId) {
-//		if (blogRepository.existsByBlogId((int) blogId)) {
-//			likeAndDislikeRepository.deleteByBlog_BlogId(blogId);
-//			commentRepository.deleteByBlog_BlogId(blogId);
-//			blogRepository.deleteByBlogIdAndUsers_Id(blogId, userId);
-//		} else {
-//			throw new RecordNotFoundException(CustomMessage.NO_RECOURD_FOUND + blogId);
-//		}
-//		return new BaseResponse(CustomMessage.BLOG_POST_DELETE);
-//	}
-//
-//	
 	public List<BlogDTO> findAllBloggerPostByStatus(int publish, Integer active) {
 		List<Blog> findApprovedBloggerPost = blogRepository.findByPublish(publish);
 		List<UpAndDownvote> upAndDownvoteList = upAndDownVoteRepository.findAll();
@@ -126,6 +102,8 @@ public class BloggerServiceImpl extends BloggerDao {
 		blogDTO.setIsShowAdminBoard(!currentUpAndDownvoteDTOs.isEmpty() ? 1 : 0);
 		blogDTO.setTotalUpVote(totalUpVote);
 		blogDTO.setTotaldownVote(totalDownVote);
+		blogDTO.setUpvoteList(totalUpvoteDtos);
+		blogDTO.setDownvoteList(totalDownvoteDtos);
 		return blogDTO;
 	}
 
@@ -157,14 +135,6 @@ public class BloggerServiceImpl extends BloggerDao {
 		upAndDownVoteRepository.approvePaddingVote(upAndDownvoteDTO.getUpAndDownVoteId(), Status.ACTIVE.getCode());
 		return new BaseResponse(CustomMessage.VOTE_UNVOTE_MESSAGE);
 	}
-
-//	public BaseResponse commentOtherApprovedPost(CommentDTO commentDTO) {
-//		Comment comment = copyCommentDtoToEntity(commentDTO);
-//		commentRepository.save(comment);
-//		return new BaseResponse(CustomMessage.COMMENT_SUCCESS);
-//	}
-//	
-//	
-//	
+	
 
 }

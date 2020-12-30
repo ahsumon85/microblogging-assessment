@@ -2,6 +2,7 @@ import React, { Component, Link } from 'react';
 import axios from 'axios';
 import '../App.css'
 import UserService from "../services/user.service";
+import AuthService from "../services/auth.service";
 
 import Modal from "./modal.component"
 
@@ -11,7 +12,10 @@ class Table extends Component {
         super(props);
     
         this.state = {
-          modal: false
+            downvotemodal: false,
+            upvotemodal: false,
+            upvote: true,
+            dowonvote: true
         };
       }
   
@@ -46,16 +50,38 @@ class Table extends Component {
         this.modalClose();
       }
     
-      modalOpen(upAndDownvoteList) {
-        this.setState({ modal: true });
+      downVotemodalOpen(upAndDownvoteList) {
+        this.setState({ downvotemodal: true });
+       
+      }
+
+      upVotemodalOpen(upAndDownvoteList) {
+        this.setState({ upvotemodal: true });
        
       }
     
-      modalClose() {
+      upVotemodalClose() {
         this.setState({
           modalInputName: "",
-          modal: false
+          upvotemodal: false
         });
+      }
+
+      downVotemodalClose() {
+        this.setState({
+          modalInputName: "",
+          downvotemodal: false
+        });
+      }
+
+      componentDidMount() {
+        const currentUser = AuthService.getCurrentUser();
+        if (!currentUser) {
+                this.setState({ 
+                    upvote: false,
+                    dowonvote: false
+                })
+            }
       }
 
     render() {
@@ -66,7 +92,8 @@ class Table extends Component {
                             <span style={{fontWeight: "bold", color:"Highlight"}}>
                                 {this.props.blog.contentTitle}
                             </span>
-                            <span style={{marginLeft:'1vw'}}>
+                            <br />
+                            <span>
                                 {this.props.blog.user.email}
                             </span>
                             <span style={{marginLeft:'1vw'}}>
@@ -83,15 +110,25 @@ class Table extends Component {
                     </tr>
                     <tr>
                         <td>
-                            <a href="javascript:;" style={{fontWeight: "bold", color:"green"}} onClick={e => this.modalOpen(this.props.blog.upAndDownvote)}>
-                                   Vote {" "}{this.props.blog.totalUpVote}{"  "}
-                            </a>
-                            <button type="button" onClick={this.upVoteBloggerPost} className="btn btn-success">Upvote</button>
-                                <span style={{marginLeft: "1vw"}}> </span>
-                            <a href="javascript:;" style={{fontWeight: "bold", color:"green"}} onClick={e => this.modalOpen(this.props.blog.upAndDownvote)}>
-                                   Downvote {" "}{this.props.blog.totaldownVote}{"  "}
-                            </a>
-                            <button type="button" onClick={this.downVoteBloggerPost} className="btn btn-danger">Downvote</button>
+                          
+                            {this.props.blog.totalUpVote && (
+                                <a href="javascript:;" style={{fontWeight: "bold", color:"green"}} onClick={e => this.upVotemodalOpen()}>
+                                     {" "}{this.props.blog.totalUpVote}{"  "} Vote  {" "}
+                                </a>
+                            )}
+                            {this.state.upvote && (
+                                <button type="button" onClick={this.upVoteBloggerPost} className="btn btn-success">Upvote</button>
+                            )}
+                            <span style={{marginLeft: "1vw"}}> </span>
+
+                            {this.props.blog.totaldownVote && (
+                                <a href="javascript:;" style={{fontWeight: "bold", color:"green"}} onClick={e => this.downVotemodalOpen()}>
+                                     {" "}{this.props.blog.totaldownVote}{"  "} Downvote  {" "}
+                                </a>
+                            )}
+                            {this.state.dowonvote && (
+                                <button type="button" onClick={this.downVoteBloggerPost} className="btn btn-danger">Downvote</button>
+                            )}
                             <span style={{marginLeft: "5vw"}}> </span>
                             {this.props.blog.isDelete && (
                                 <button type="button" onClick={this.deletePost} className="btn btn-danger">Delete </button>
@@ -100,20 +137,29 @@ class Table extends Component {
                     </tr>
 
 
-                    <Modal show={this.state.modal} handleClose={e => this.modalClose(e)}>
+                    <Modal show={this.state.upvotemodal} handleClose={e => this.upVotemodalClose(e)}>
                     <tr>
-                         {this.props.blog.upAndDownvote.map(
+                         {this.props.blog.upvoteList.map(
                                 vote => 
                                     <tr key = {vote.upAndDownVoteId} style={{backgroundColor:'white'}}>
                                         <td style={{fontWeight: "bold"}}> {vote.user.email} </td>
-                                        <td style={{color: 'green', fontWeight: "bold"}}>{vote.upvote ? <p>Upvote </p> :'' }</td> 
-                                        <td style={{color: 'red', fontWeight: "bold"}}> {vote.downvote ? <p>Downvote </p> : '' }</td> 
-                                        
                                     </tr>
                             )
                         }
                     </tr>
-        </Modal>
+                    </Modal>
+
+                    <Modal show={this.state.downvotemodal} handleClose={e => this.downVotemodalClose(e)}>
+                    <tr>
+                         {this.props.blog.downvoteList.map(
+                                vote => 
+                                    <tr key = {vote.upAndDownVoteId} style={{backgroundColor:'white'}}>
+                                        <td style={{fontWeight: "bold"}}> {vote.user.email} </td>
+                                    </tr>
+                            )
+                        }
+                    </tr>
+                    </Modal>
             </tbody>
         );
     }

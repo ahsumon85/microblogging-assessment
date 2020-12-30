@@ -20,6 +20,10 @@ public class BlogDTO {
 
 	private List<UpAndDownvoteDTO> upAndDownvote;
 
+	private List<UpAndDownvoteDTO> upvoteList;
+
+	private List<UpAndDownvoteDTO> downvoteList;
+
 	private List<CommentDTO> bloggerComment;
 
 	private UserDTO user;
@@ -112,6 +116,22 @@ public class BlogDTO {
 
 	public void setIsShowAdminBoard(int isShowAdminBoard) {
 		this.isShowAdminBoard = isShowAdminBoard;
+	}
+
+	public List<UpAndDownvoteDTO> getUpvoteList() {
+		return upvoteList;
+	}
+
+	public void setUpvoteList(List<UpAndDownvoteDTO> upvoteList) {
+		this.upvoteList = upvoteList;
+	}
+
+	public List<UpAndDownvoteDTO> getDownvoteList() {
+		return downvoteList;
+	}
+
+	public void setDownvoteList(List<UpAndDownvoteDTO> downvote) {
+		this.downvoteList = downvote;
 	}
 
 }

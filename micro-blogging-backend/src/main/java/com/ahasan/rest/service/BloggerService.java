@@ -1,5 +1,6 @@
 package com.ahasan.rest.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -14,33 +15,32 @@ import com.ahasan.rest.dto.UpAndDownvoteDTO;
 
 @Service
 public class BloggerService {
-	
+
 	@Autowired
 	private BloggerDao bloggerDao;
 
-	public BaseResponse  createBlogPostByBlogger(BlogDTO blogDTO) {
+	public BaseResponse createBlogPostByBlogger(BlogDTO blogDTO) {
 		return bloggerDao.createBlogPostByBlogger(blogDTO);
 	}
 
-	public List<BlogDTO> findAllBloggerPostByStatus(int publish, Integer status){
-		return bloggerDao.findAllBloggerPostByStatus(publish, status);
+	public List<BlogDTO> findAllBloggerPostByStatus(int publish, Integer status) {
+		List<BlogDTO> blogDTOs = bloggerDao.findAllBloggerPostByStatus(publish, status);
+		Collections.reverse(blogDTOs);
+		return blogDTOs;
 	}
 
 	public BaseResponse upAndDownvote(UpAndDownvoteDTO upAndDownvoteDTO) {
 		return bloggerDao.upAndDownvote(upAndDownvoteDTO);
 	}
-	
-	public BaseResponse deleteOwnBlogPostById(Long blogId) {
-		return bloggerDao.deleteOwnBlogPostById(blogId);
-	}
-	
+
 	public List<BlogDTO> findAllBLoggerPostUserName(String username) {
-		return bloggerDao.findAllBLoggerPostUserName(username);
+		List<BlogDTO> blogDTOs = bloggerDao.findAllBLoggerPostUserName(username);
+		Collections.reverse(blogDTOs);
+		return blogDTOs;
 	}
 
 	public BaseResponse approvedUpAndDownvote(UpAndDownvoteDTO upAndDownvoteDTO) {
 		return bloggerDao.approvedUpAndDownvote(upAndDownvoteDTO);
 	}
 
-//	public BaseResponse commentOtherApprovedPost(CommentDTO commentDTO);
 }

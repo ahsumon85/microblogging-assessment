@@ -21,11 +21,13 @@ export default class BoardBlogger extends Component {
   constructor(props) {
     super(props);
     this.onChangeContent = this.onChangeContent.bind(this);
+    this.onChangeContentTitle = this.onChangeContentTitle.bind(this);
     this.handleBloggerPost = this.handleBloggerPost.bind(this);
     this.state = {
       blogList: [],
       status: false,
       content: '',
+      contentTitle: '',
       successful: false,
       message: "",
       currentUser: {
@@ -62,6 +64,11 @@ export default class BoardBlogger extends Component {
     });
   }
 
+  onChangeContentTitle(e) {
+    this.setState({
+      contentTitle: e.target.value
+    });
+  }
 
   handleBloggerPost(e) {
     e.preventDefault();
@@ -74,7 +81,7 @@ export default class BoardBlogger extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
-      UserService.blogPostByBlogger(this.state.content)
+      UserService.blogPostByBlogger(this.state.content,this.state.contentTitle)
           .then(response => {
               window.location.reload();
             },
@@ -111,6 +118,17 @@ export default class BoardBlogger extends Component {
           >
             {!this.state.successful && (
               <div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    placeholder="Enter blog title"
+                    className="form-control"
+                    name="contentTitle"
+                    value={this.state.contentTitle}
+                    onChange={this.onChangeContentTitle}
+                    validations={[required]}
+                  />
+                </div>
                 <div className="form-group">
                   <textarea
                     type="text"

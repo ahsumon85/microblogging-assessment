@@ -25,7 +25,6 @@ import com.ahasan.rest.dto.BlogDTO;
 import com.ahasan.rest.dto.UpAndDownvoteDTO;
 import com.ahasan.rest.service.BloggerService;
 
-
 @RestController
 @RequestMapping(StaticUrlProvider.BLOGGER_URL)
 @Validated
@@ -39,23 +38,17 @@ public class BloggerPostController {
 		BaseResponse response = bloggerService.createBlogPostByBlogger(blogDTO);
 		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
-	
+
 	@PostMapping("/vote/post")
 	public ResponseEntity<BaseResponse> upAndDownvote(@Valid @RequestBody UpAndDownvoteDTO upAndDownvoteDTO) {
 		BaseResponse response = bloggerService.upAndDownvote(upAndDownvoteDTO);
 		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
-	
+
 	@PostMapping("/approved/vote")
 	public ResponseEntity<BaseResponse> approvedUpAndDownvote(@Valid @RequestBody UpAndDownvoteDTO upAndDownvoteDTO) {
 		BaseResponse response = bloggerService.approvedUpAndDownvote(upAndDownvoteDTO);
 		return new ResponseEntity<>(response, HttpStatus.CREATED);
-	}
-
-	@DeleteMapping(value = "/delete/post/{blogId}")
-	public ResponseEntity<BaseResponse> deleteOwnBlogPostById(@Valid @NotNull(message = "userId can't be null") @PathVariable("blogId") Long blogId) {
-		BaseResponse response = bloggerService.deleteOwnBlogPostById(blogId);
-		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/find/post")
@@ -63,11 +56,11 @@ public class BloggerPostController {
 		List<BlogDTO> list = bloggerService.findAllBloggerPostByStatus(Status.ACTIVE.getCode(), status);
 		return new ResponseEntity<List<BlogDTO>>(list, HttpStatus.OK);
 	}
-	
+
 	@GetMapping(value = "/find/post/by-name")
 	public ResponseEntity<List<BlogDTO>> findAllBLoggerPostUserName(@RequestParam String username) {
 		List<BlogDTO> blogDTOs = bloggerService.findAllBLoggerPostUserName(username);
 		return new ResponseEntity<List<BlogDTO>>(blogDTOs, HttpStatus.OK);
 	}
-	
+
 }

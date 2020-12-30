@@ -26,7 +26,8 @@ class AdminTable extends Component {
                             <span style={{fontWeight: "bold", color:"Highlight"}}>
                                 {this.props.blog.contentTitle}
                             </span>
-                            <span style={{marginLeft:'1vw'}}>
+                            <br/>
+                            <span>
                                 {this.props.blog.user.email}
                             </span>
                             <span style={{marginLeft:'1vw'}}>
