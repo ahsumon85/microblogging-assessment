@@ -52,7 +52,7 @@ password: **admin**
 
 1. Project clone from **github** by using the given URL **https://github.com/ahsumon85/microblogging-assessment.git**
 
-2. Go to the **micro-blogging-backend/src/main/resources/application.properties** and change **mysqldb** instead of **localhost** and also add **blog-server** instead of localhost.
+2. Go to the **micro-blogging-backend/src/main/resources/application.properties** and change **mysqldb** instead of **localhost**.
 
 3. git to the $ cd **micro-blogging-backend/** and **$ mav clean install** to build java project
 
@@ -63,3 +63,5 @@ password: **admin**
 5. **$ docker-compose up**
 
 6. **$ docker ps**
+
+7.  Follow the link **http://localhost:8086**
