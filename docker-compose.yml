@@ -18,7 +18,7 @@ services:
     build: ./micro-blogging-frontend/
     image: blog-client-image:0.1
     ports:
-      - "8086:8086"
+      - "8085:8086"
     restart: always
     networks:
             micro_blog:
