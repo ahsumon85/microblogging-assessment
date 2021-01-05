@@ -2,7 +2,7 @@ package com.ahasan.rest.common.utils;
 
 public enum Topic {
 
-	EMPLOYEE("Employee", 101);
+	USER("User", 101);
 
 	private final String name;
 

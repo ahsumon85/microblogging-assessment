@@ -1,4 +1,4 @@
-package com.ahasan.rest.service;
+package com.ahasan.rest.daoimpl;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -32,9 +32,9 @@ public class AuthUserDetail extends User implements UserDetails {
         
         getRoles().forEach(role -> {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
-            role.getPermissions().forEach(permission -> {
-                grantedAuthorities.add(new SimpleGrantedAuthority(permission.getName()));
-            });
+//            role.getPermissions().forEach(permission -> {
+//                grantedAuthorities.add(new SimpleGrantedAuthority(permission.getName()));
+//            });
 
         });
         return grantedAuthorities;

@@ -17,5 +17,7 @@ public class CustomMessage {
 
 	public static final String NO_RECOURD_FOUND = "No record found for given value: ";
 	public static final String DOESNOT_EXIT = "Does not exist for given value: ";
+	
+	public static final String SIGNUP_SUCCESS_MESSAGE = " sign up has been saved successfully !";
 
 }

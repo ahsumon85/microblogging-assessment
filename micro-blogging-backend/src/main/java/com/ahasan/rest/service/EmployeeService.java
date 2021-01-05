@@ -19,10 +19,10 @@ import com.ahasan.rest.entity.EmployeeEntity;
 import com.ahasan.rest.repo.EmployeeRepo;
 
 /**
-*
-* @author Ahasan Habib
-* @since 03 06 20
-*/
+ *
+ * @author Ahasan Habib
+ * @since 03 06 20
+ */
 
 @Service
 @Transactional
@@ -39,20 +39,20 @@ public class EmployeeService {
 		if (employeeRepo.existsById(employeeId)) {
 			EmployeeEntity employeeEntity = employeeRepo.findByEmployeeId(employeeId);
 			return copyEmployeeEntityToDto(employeeEntity);
-		}else {
+		} else {
 			throw new RecordNotFoundException(CustomMessage.DOESNOT_EXIT + employeeId);
 		}
-		
+
 	}
 
 	public BaseResponse createOrUpdateEmployee(EmployeeDTO employeeDTO) {
 		try {
 			EmployeeEntity employeeEntity = copyEmployeeDtoToEntity(employeeDTO);
 			employeeRepo.save(employeeEntity);
-		}  catch (DataIntegrityViolationException ex) {
+		} catch (DataIntegrityViolationException ex) {
 			throw new CustomDataIntegrityViolationException(ex.getCause().getCause().getMessage());
 		}
-		return new BaseResponse(Topic.EMPLOYEE.getName() + CustomMessage.SAVE_SUCCESS_MESSAGE);
+		return new BaseResponse(CustomMessage.SAVE_SUCCESS_MESSAGE);
 	}
 
 	public BaseResponse deleteEmployeeById(Long employeeId) {
@@ -61,7 +61,7 @@ public class EmployeeService {
 		} else {
 			throw new RecordNotFoundException(CustomMessage.NO_RECOURD_FOUND + employeeId);
 		}
-		return new BaseResponse(Topic.EMPLOYEE.getName() + CustomMessage.DELETE_SUCCESS_MESSAGE);
+		return new BaseResponse(CustomMessage.DELETE_SUCCESS_MESSAGE);
 	}
 
 	private EmployeeDTO copyEmployeeEntityToDto(EmployeeEntity employeeEntity) {

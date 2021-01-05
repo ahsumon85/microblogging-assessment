@@ -12,7 +12,7 @@ import com.ahasan.rest.entity.User;
 * @since 03 06 20
 */
 
-public interface UserDetailRepository extends JpaRepository<User,Integer> {
+public interface UserRepository extends JpaRepository<User,Integer> {
 
     Optional<User> findByUsername(String name);
 

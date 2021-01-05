@@ -32,7 +32,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 			http.csrf().disable()
 				.sessionManagement().disable()
 				.authorizeRequests()
-				.antMatchers("/employee/list").permitAll()
+				.antMatchers("/user/sing-up").permitAll()
 				.and()
 				.requestMatchers().antMatchers(SECURED_PATTERN)
 				.and()

@@ -3,6 +3,7 @@ package com.ahasan.rest.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 /**
 *
@@ -27,6 +28,8 @@ public class Role implements Serializable {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "permission_role", joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id") }, inverseJoinColumns = {@JoinColumn(name = "permission_id", referencedColumnName = "id") })
 	private List<Permission> permissions;
+	
+
 
 	public Integer getId() {
 		return id;
@@ -44,12 +47,14 @@ public class Role implements Serializable {
 		this.name = name;
 	}
 
-	public List<Permission> getPermissions() {
-		return permissions;
-	}
+//	public List<Permission> getPermissions() {
+//		return permissions;
+//	}
+//
+//	public void setPermissions(List<Permission> permissions) {
+//		this.permissions = permissions;
+//	}
 
-	public void setPermissions(List<Permission> permissions) {
-		this.permissions = permissions;
-	}
+
 
 }

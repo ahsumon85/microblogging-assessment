@@ -1,4 +1,4 @@
-package com.ahasan.rest.service;
+package com.ahasan.rest.daoimpl;
 
 import java.util.Optional;
 
@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.ahasan.rest.entity.User;
-import com.ahasan.rest.repo.UserDetailRepository;
+import com.ahasan.rest.repo.UserRepository;
 
 /**
 *
@@ -22,12 +22,12 @@ import com.ahasan.rest.repo.UserDetailRepository;
 public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired
-    private UserDetailRepository userDetailRepository;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
 
-        Optional<User> optionalUser = userDetailRepository.findByUsername(name);
+        Optional<User> optionalUser = userRepository.findByUsername(name);
 
         optionalUser.orElseThrow(() -> new UsernameNotFoundException("Username or password wrong"));
 
