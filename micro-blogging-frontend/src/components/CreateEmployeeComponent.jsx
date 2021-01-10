@@ -12,9 +12,9 @@ class CreateEmployeeComponent extends Component {
             lastName: '',
             emailId: ''
         }
-        this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
-        this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
-        this.saveOrUpdateEmployee = this.saveOrUpdateEmployee.bind(this);
+        // this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
+        // this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
+        // this.saveOrUpdateEmployee = this.saveOrUpdateEmployee.bind(this);
     }
 
     // step 3
@@ -33,34 +33,34 @@ class CreateEmployeeComponent extends Component {
             });
         }        
     }
-    saveOrUpdateEmployee = (e) => {
-        e.preventDefault();
-        let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId};
-        console.log('employee => ' + JSON.stringify(employee));
+    // saveOrUpdateEmployee = (e) => {
+    //     e.preventDefault();
+    //     let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId};
+    //     console.log('employee => ' + JSON.stringify(employee));
 
-        // step 5
-        if(this.state.id === '_add'){
-            EmployeeService.createEmployee(employee).then(res =>{
-                this.props.history.push('/employees');
-            });
-        }else{
-            EmployeeService.updateEmployee(employee, this.state.id).then( res => {
-                this.props.history.push('/employees');
-            });
-        }
-    }
+    //     // step 5
+    //     if(this.state.id === '_add'){
+    //         EmployeeService.createEmployee(employee).then(res =>{
+    //             this.props.history.push('/employees');
+    //         });
+    //     }else{
+    //         EmployeeService.updateEmployee(employee, this.state.id).then( res => {
+    //             this.props.history.push('/employees');
+    //         });
+    //     }
+    // }
     
-    changeFirstNameHandler= (event) => {
-        this.setState({firstName: event.target.value});
-    }
+    // changeFirstNameHandler= (event) => {
+    //     this.setState({firstName: event.target.value});
+    // }
 
-    changeLastNameHandler= (event) => {
-        this.setState({lastName: event.target.value});
-    }
+    // changeLastNameHandler= (event) => {
+    //     this.setState({lastName: event.target.value});
+    // }
 
-    changeEmailHandler= (event) => {
-        this.setState({emailId: event.target.value});
-    }
+    // changeEmailHandler= (event) => {
+    //     this.setState({emailId: event.target.value});
+    // }
 
     cancel(){
         this.props.history.push('/employees');
