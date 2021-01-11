@@ -7,14 +7,14 @@ class CreateEmployeeComponent extends Component {
 
         this.state = {
             // step 2
-            id: this.props.match.params.id,
-            firstName: '',
-            lastName: '',
-            emailId: ''
+            employeeId: 'this.props.match.params.id',
+            employeeName: '',
+            employeeGender: '',
+            employeePhone: ''
         }
         // this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
         // this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
-        // this.saveOrUpdateEmployee = this.saveOrUpdateEmployee.bind(this);
+        this.saveOrUpdateEmployee = this.saveOrUpdateEmployee.bind(this);
     }
 
     // step 3
@@ -24,31 +24,31 @@ class CreateEmployeeComponent extends Component {
         if(this.state.id === '_add'){
             return
         }else{
-            EmployeeService.getEmployeeById(this.state.id).then( (res) =>{
-                let employee = res.data;
-                this.setState({firstName: employee.firstName,
-                    lastName: employee.lastName,
-                    emailId : employee.emailId
-                });
-            });
+            // EmployeeService.getEmployeeById(this.state.id).then( (res) =>{
+            //     let employee = res.data;
+            //     this.setState({firstName: employee.firstName,
+            //         lastName: employee.lastName,
+            //         emailId : employee.emailId
+            //     });
+            // });
         }        
     }
-    // saveOrUpdateEmployee = (e) => {
-    //     e.preventDefault();
-    //     let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId};
-    //     console.log('employee => ' + JSON.stringify(employee));
+    saveOrUpdateEmployee = (e) => {
+        e.preventDefault();
+        let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId};
+        console.log('employee => ' + JSON.stringify(employee));
 
-    //     // step 5
-    //     if(this.state.id === '_add'){
-    //         EmployeeService.createEmployee(employee).then(res =>{
-    //             this.props.history.push('/employees');
-    //         });
-    //     }else{
-    //         EmployeeService.updateEmployee(employee, this.state.id).then( res => {
-    //             this.props.history.push('/employees');
-    //         });
-    //     }
-    // }
+        // step 5
+        if(this.state.id === '_add'){
+            EmployeeService.createEmployee(employee).then(res =>{
+                this.props.history.push('/employees');
+            });
+        }else{
+            // EmployeeService.updateEmployee(employee, this.state.id).then( res => {
+            //     this.props.history.push('/employees');
+            // });
+        }
+    }
     
     // changeFirstNameHandler= (event) => {
     //     this.setState({firstName: event.target.value});
@@ -87,18 +87,18 @@ class CreateEmployeeComponent extends Component {
                                     <form>
                                         <div className = "form-group">
                                             <label> First Name: </label>
-                                            <input placeholder="First Name" name="firstName" className="form-control" 
-                                                value={this.state.firstName} onChange={this.changeFirstNameHandler}/>
+                                            <input placeholder="Name" name="name..." className="form-control" 
+                                                value={this.state.employeeName} onChange={this.changeEmployeeNameHandler}/>
                                         </div>
                                         <div className = "form-group">
                                             <label> Last Name: </label>
-                                            <input placeholder="Last Name" name="lastName" className="form-control" 
-                                                value={this.state.lastName} onChange={this.changeLastNameHandler}/>
+                                            <input placeholder="Gender" name="gender..." className="form-control" 
+                                                value={this.state.employeeGender} onChange={this.changeEmployeeGenderHandler}/>
                                         </div>
                                         <div className = "form-group">
                                             <label> Email Id: </label>
-                                            <input placeholder="Email Address" name="emailId" className="form-control" 
-                                                value={this.state.emailId} onChange={this.changeEmailHandler}/>
+                                            <input placeholder="Phone" name="phone...." className="form-control" 
+                                                value={this.state.employeePhone} onChange={this.changeEmployeePhoneHandler}/>
                                         </div>
 
                                         <button className="btn btn-success" onClick={this.saveOrUpdateEmployee}>Save</button>
